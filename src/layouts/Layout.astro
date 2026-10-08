@@ -1,0 +1,246 @@
+---
+const { title } = Astro.props;
+---
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content="A project that illustrates Astro and image processing and responsive images" />
+    <title>Astro and Images | { title }</title>
+  </head>
+  <body>
+    <header>
+      <div class="sitelogo">Astro Image Component</div>
+
+      <nav>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/single-image/">Local Single Image</a></li>
+          <li><a href="/group-of-images/">Local Group Images</a></li>
+          <li><a href="/single-remote-image/">Remote Single Image</a></li>
+          <li><a href="/group-of-remote-images/">Remote Group Images</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+    <footer>
+      <p>
+        The purpose of this site is to demonstrate the Image component in Astro
+        and its use in responsive images.
+      </p>
+      <ul>
+        <li>
+          <a href="https://docs.astro.build/en/guides/images/"
+            >Astro Images Guide</a
+          > | Astro
+        </li>
+        <li>
+          <a
+            href="https://developer.mozilla.org/en-US/docs/Web/HTML/Guides/Responsive_images"
+            >Using responsive images in HTML</a
+          > | MDN
+        </li>
+      </ul>
+    </footer>
+  </body>
+</html>
+<style is:global>
+  :root {
+    --pink: #ff3b8d;
+    --blue: #00fafb;
+    --image-columns: 1;
+  }
+  * {
+    box-sizing: border-box;
+  }
+  html {
+    margin: 0;
+    padding: 0;
+  }
+  body {
+    font-family: helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--blue);
+  }
+
+  header,
+  main,
+  footer {
+    padding-left: 10%;
+    padding-right: 10%;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin: 0;
+    padding: 0;
+    color: var(--pink);
+  }
+  h1 {
+    margin-block-end: 1rem;
+  }
+  header,
+  main {
+    background-color: white;
+  }
+  footer {
+    background-color: var(--pink);
+    color: white;
+  }
+  header {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 0.5rem solid var(--blue);
+  }
+  header,
+  main,
+  footer {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+  a:link,
+  a:visited,
+  a:hover,
+  a:active {
+    color: blue;
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+  p {
+    line-height: 1.75;
+  }
+  footer {
+    border-top: 5px solid var(--blue);
+  }
+  footer a:link,
+  footer a:visited,
+  footer a:hover,
+  footer a:active {
+    color: white;
+    text-decoration: underline;
+  }
+  footer a:hover {
+    background-color: white;
+    color: black;
+  }
+
+  .parks {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+    grid-gap: 1.5rem;
+  }
+  .parks .park img {
+    max-width: 100%;
+  }
+  .parks .park h2 {
+    text-align: center;
+  }
+  .parks .park {
+    padding: 1rem;
+    border: thin dotted var(--pink);
+  }
+  figure .credit {
+    font-style: italic;
+  }
+  figure {
+    margin: 0;
+    padding: 0;
+  }
+  .parks .park {
+    background-color: #fff;
+  }
+  main h2 {
+    margin-bottom: 1rem;
+  }
+  figcaption {
+    font-size: smaller;
+  }
+
+  header {
+    flex-basis: auto;
+    flex-grow: 1;
+    flex-shrink: 1;
+  }
+  header nav ul {
+    align-self: flex-start;
+  }
+  header nav ul {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  header nav a {
+    transition: border-color 400ms ease;
+    padding-bottom: 0.25rem;
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+    white-space: nowrap;
+    
+  }
+  header nav a:link,
+  header nav a:visited,
+  header nav a:hover,
+  header nav a:active {
+    color: white;
+    border-bottom: 2px solid transparent;
+    text-decoration: none;
+  }
+  header nav a:hover {
+    border-bottom: 2px solid gray;
+  }
+
+  li {
+    margin-bottom: 1rem;
+  }
+
+  img {
+    display: block; /* Helps prevent common layout issues */
+    max-width: 100%; /* MOST IMPORTANT: Forces image to shrink within its container */
+    height: auto; /* Ensures the image maintains its aspect ratio while shrinking */
+  }
+  @media screen and (min-height: 640px) {
+    :root {
+      --image-columns: 2;
+    }
+  }
+  @media screen and (min-width: 960px) {
+    :root {
+      --image-columns: 3;
+    }
+  }
+  @media screen and (min-width: 1264px) {
+    :root {
+      --image-columns: 4;
+    }
+  }
+  @media screen and (min-width: 1904px) {
+    :root {
+      --image-columns: 4;
+    }
+  }
+  header {
+    background-color: var(--pink);
+    color: white;
+
+    border-top: 1rem solid var(--blue);
+    border-bottom: 1rem solid var(--blue);
+  }
+  header .sitelogo {
+        font-size: 3rem;
+    font-weight: bold;
+    margin-block-end: 2rem;
+  }
+  header nav ul { list-style: none; margin: 0; padding: 0;}
+</style>

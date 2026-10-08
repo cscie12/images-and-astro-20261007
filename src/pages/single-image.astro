@@ -1,0 +1,36 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { Image } from "astro:assets";
+import gnpImage from "../assets/glacier-national-park.jpg";
+console.log(gnpImage);
+---
+
+<Layout title="Single Local Image">
+  <h1>Glacier National Park Image</h1>
+  <div class="image-container">
+    <Image
+      src={gnpImage}
+      alt="Glacier National Park"
+      widths={[
+        1320, 1200, 1080, 975, 875, 790, 710, 640, 570, 515, 460, 415, 370, 335,
+        300,
+      ]}
+      format="webp"
+      sizes="(max-width: 1200px) 80vw,  1000px"
+      layout="constrained"
+    />
+  </div>
+</Layout>
+
+<style>
+  img {
+    display: block; /* Helps prevent common layout issues */
+    max-width: 100%; /* MOST IMPORTANT: Forces image to shrink within its container */
+    height: auto; /* Ensures the image maintains its aspect ratio while shrinking */
+  }
+  div.image-container {
+    width: 80%;
+    margin-block-start: auto;
+    margin-block-end: auto;
+  }
+</style>

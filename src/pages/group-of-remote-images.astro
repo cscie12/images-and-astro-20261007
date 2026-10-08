@@ -1,0 +1,67 @@
+---
+import Layout from "../layouts/Layout.astro";
+// import Image functionality built-in to astro
+import { Image, inferRemoteSize } from "astro:assets";
+;
+/* could also get these images from JSON or an API call, but they are hardcoded as an array here 
+  to illustrate */
+const urls = [
+  "https://www.nps.gov/common/uploads/structured_data/2815637A-9869-FC9C-99461D0B36AA1922.jpg",
+  "https://www.nps.gov/common/uploads/structured_data/28B56C01-ABED-ED7B-FDC8E6D3FC843D09.jpg",
+  "https://www.nps.gov/common/uploads/structured_data/29EB105C-BCE3-4859-9B83F22E1091AA2F.jpg",
+  "https://www.nps.gov/common/uploads/structured_data/2930A635-D9D1-E48D-571A9BBB8F078588.jpg",
+  "https://www.nps.gov/common/uploads/structured_data/3C7D5920-1DD8-B71B-0B83F012ED802CEA.jpg",
+  "https://www.nps.gov/common/uploads/structured_data/2A83F1F6-BA74-D152-1F43D8C6910C3897.jpg",
+  "https://www.nps.gov/common/uploads/structured_data/2827C4D2-B449-5B06-82F83796B536F344.jpg",
+  "https://www.nps.gov/common/uploads/structured_data/29F8038A-F8C7-34C4-3AD1016597F0EE55.jpg",
+];
+
+---
+<Layout title="Array of Remote Images">
+  <h1>Remote Images</h1>
+  <h2>Array of Remote Images</h2>
+  <div class="image-gallery">
+    {
+      urls.map((src) => {
+        return (
+          <Image
+            src={src}
+            inferSize
+            alt="Remote Image"
+            widths={[
+              400, 440, 484, 532, 585, 643, 707, 777, 854, 939, 1032, 1135,
+              1248, 1372, 1509
+            ]}
+            format="webp"
+            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
+            layout="constrained"
+          />
+        );
+      })
+    }
+  </div>
+</Layout>
+<style>
+  .image-gallery {
+    --gallery-columns: 1;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(var(--gallery-columns), 1fr);
+  }
+
+  @media screen and (width >= 48rem) {
+    .image-gallery {
+      --gallery-columns: 2;
+    }
+  }
+  @media screen and (width >= 64rem) {
+    .image-gallery {
+      --gallery-columns: 3;
+    }
+  }
+  @media screen and (width >= 80rem) {
+    .image-gallery {
+      --gallery-columns: 4;
+    }
+  }
+</style>

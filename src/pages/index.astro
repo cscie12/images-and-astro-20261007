@@ -1,16 +1,23 @@
 ---
+import Layout from "../layouts/Layout.astro";
+import { Code } from "astro:components";
+
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout title="Home">
+  <h1>Examples of the use of Astro's built-in Image component</h1>
+  <ul>
+    <li><a href="single-image/">Static Image From import (Local)</a></li>
+    <li>
+      <a href="group-of-images/">Group of images from an import glob (Local)</a>
+    </li>
+    <li><a href="single-remote-image/">Image from a URL (Remote)</a></li>
+    <li><a href="group-of-remote-images/">Images from URLs (Remote)</a></li>
+  </ul>
+  <p>Note for remote URLs, in the <Code code='astro.config.js' lang="txt" inline /> you have to define the domains that are permitted to get remote images from.</p>
+
+  <Code code='export default defineConfig({
+  image: { domains: ["www.nps.gov"] },
+});' lang="js" />
+
+</Layout>

@@ -1,0 +1,29 @@
+---
+import Layout from '../layouts/Layout.astro';
+// use the built-in Image functionality of Astro
+import { Image, inferRemoteSize } from 'astro:assets';
+
+const imgUrl = 'https://www.nps.gov/common/uploads/structured_data/3C7D5920-1DD8-B71B-0B83F012ED802CEA.jpg';
+const { width, height } = await inferRemoteSize(imgUrl);
+console.log(imgUrl);
+console.log(width);
+console.log(height);
+---
+
+<Layout title="Single Remote Image">
+	<h1>Remote Image</h1>
+
+  <h2>Single Remote Image</h2>
+  <Image 
+    src={imgUrl} 
+    inferSize
+    alt="Remote Image" 
+    widths={[2000, 1800, 1640, 1320, 1200, 1080, 975, 875, 790, 710, 640, 570, 515, 460, 415, 370, 335, 300]}
+    format="webp"
+    sizes="(max-width: 1200px) 80vw"
+    width={width}   
+    height={height} 
+    layout="constrained"
+  />
+
+</Layout>

@@ -1,0 +1,54 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+
+// 1. Define the glob pattern
+// The result is an object of all matching file paths and their import functions.
+const imageImports = import.meta.glob<{default: ImageMetadata}>('../assets/birds/*.{jpeg,jpg,png,webp}', { eager: true });
+
+// 2. Convert the object to an array of metadata
+const images = Object.values(imageImports).map(module => module.default); 
+
+// The 'images' array now contains the Image Metadata Objects (src, width, height, etc.)
+// for every image found in the 'birds' folder.
+console.log(images);
+images.forEach((i) => {
+  console.log(i);
+  console.log(i.src)
+})
+---
+<Layout title="Birds">
+	<h1>Birds</h1>
+
+  <section class="image-gallery">
+  {images.map((image) => (
+    <div class="gallery-item">
+      <Image 
+        src={image} 
+        alt="Gallery Image" 
+        widths={[200, 400, 600, 800, 960, 1200, 2000]}
+        format="webp"
+        sizes="(max-width: 600px) 100vw, (max-width: 1280px) 50vw. 25vw"
+        layout="constrained"
+      />
+    </div>
+  ))}
+</section>
+
+</Layout>
+<style>
+.image-gallery { --gallery-columns: 1; display: grid; gap: 1rem; grid-template-columns: repeat(var(--gallery-columns), 1fr);}
+
+
+@media screen and (width >= 48rem) {
+  .image-gallery {
+    --gallery-columns: 2;
+  }
+}
+@media screen and (width >= 80rem) {
+  .image-gallery {
+    --gallery-columns: 4;
+  }
+}
+
+</style>
