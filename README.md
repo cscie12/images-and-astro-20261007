@@ -6,7 +6,8 @@ Examples of using Astro's `<Image />` component (from `astro:assets`) to produce
 npm install
 npm run dev       # http://localhost:4321
 npm run build     # catches errors the dev server may not show
-npm run preview   # view the site created by the 'build' command```
+npm run preview   # view the site created by the 'build' command
+```
 
 ## Pages
 
